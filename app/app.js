@@ -6,8 +6,6 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
-import {bindActionCreators} from 'redux';
-import { connect } from 'react-redux';
 
 import Auth from './components/auth/auth.js';
 

@@ -8,10 +8,14 @@ import {
   View,
   ActivityIndicator,
 } from 'react-native';
+import { connect } from 'react-redux';
+import { login, logout } from '../../actions/session_actions.js';
 
-export default class Login extends Component {
-  constructor() {
-    super();
+import Home from '../home/home.js';
+
+class Login extends Component {
+  constructor(props) {
+    super(props);
 
     this.state = {
       email: "",
@@ -30,27 +34,7 @@ export default class Login extends Component {
 
   getUsersFromApi() {
     const { email, password } = this.state;
-    return fetch(`http://192.168.128.240:3000/session`, {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        user: {
-          email,
-          password
-        }
-      })
-    })
-      .then((response) => response.json())
-      .then((responseJson) => {
-        console.log(responseJson);
-        return responseJson;
-      })
-      .catch((error) => {
-        console.error(error);
-      }); 
+    this.props.login({email, password});
   }
 
   render() {
@@ -77,7 +61,6 @@ export default class Login extends Component {
         Log In
       </Text>
     </TouchableOpacity>
-
   </View>
     );
   }
@@ -98,3 +81,15 @@ const styles = StyleSheet.create({
 
   },
 });
+
+const mapStateToProps = (state) => (
+  {
+    errors: state.session.errors
+  }
+);
+
+const mapDispatchToProps = dispatch => ({
+  login: user => dispatch(login(user))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

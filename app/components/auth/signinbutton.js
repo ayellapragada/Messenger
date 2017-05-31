@@ -21,11 +21,15 @@ export default class SigninButton extends Component {
           style={styles.button}
           onPress={changeLogin}
         >
-          <Text>
-            <FontAwesome>
-              {Icons.facebookSquare}
-            </FontAwesome> 
-            {text}
+          <Text style={styles.text}>
+            <Text>
+              <FontAwesome style={styles.icon}>
+                {Icons.facebookSquare}
+              </FontAwesome> 
+            </Text>
+            <Text>
+              {text}
+            </Text>
           </Text>
         </TouchableOpacity>
 
@@ -37,5 +41,13 @@ export default class SigninButton extends Component {
 const styles = StyleSheet.create({
   button: {
     alignSelf: 'center',
+    padding: 10,
   },
+  text: {
+    fontSize: 32,
+    justifyContent: 'space-around',
+  },
+  icon: {
+    color: '#0084ff',
+  }
 });
