@@ -6,8 +6,7 @@ export const USER_LOGOUT = "USER_LOGOUT";
 
 export const login = user => dispatch => (
   APIUtil.login(user)
-  .then(returnedUser => dispatch(receiveCurrentUser(returnedUser)),
-    err => dispatch(receiveErrors(err.responseJSON)))
+  .then(returnedUser => dispatch(receiveCurrentUser(returnedUser)))
 );
 
 export const logout = () => dispatch => (
