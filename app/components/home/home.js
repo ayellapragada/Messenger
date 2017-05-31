@@ -1,11 +1,11 @@
 import React from 'react';
 import { Text } from 'react-native';
 
-const Home = () => {
+const Home = ({currentUser}) => {
 
   return (
     <Text>
-      Home.
+      {currentUser.full_name}
     </Text>
   );
 };
