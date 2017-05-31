@@ -1,4 +1,4 @@
-import { BASE_URL } from './base_url.js';
+import { BASE_URL, handleResponse } from './base_util.js';
 
 export const login = user => (
   fetch(
@@ -13,10 +13,9 @@ export const login = user => (
         user
       })
     })
-  .then((response) => response.json())
-  .then((responseJson) => {
-    return responseJson;
-  })
+  .then(handleResponse)
+  .then(response => response.json())
+  .then(responseJson => responseJson )
 );
 
 export const logout = () => (
@@ -29,8 +28,7 @@ export const logout = () => (
         'Content-Type': 'application/json',
       },
     })
-  .then((response) => response.json())
-  .then((responseJson) => {
-    return responseJson;
-  })
+  .then(handleResponse)
+  .then(response => response.json())
+  .then(responseJson => responseJson )
 );
