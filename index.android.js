@@ -8,4 +8,20 @@ import {
 
 import Root from './root';
 
-AppRegistry.registerComponent('Messenger', () => Root);
+import { StackNavigator  } from 'react-navigation';
+
+class HomeScreen extends React.Component {
+  static navigationOptions = {
+    title: 'Welcome', header: null
+  };
+  render() {
+    return <Root />;
+  }
+
+}
+
+const SimpleApp = StackNavigator({
+  Home: { screen: HomeScreen  },
+});
+
+AppRegistry.registerComponent('Messenger', () => SimpleApp);
