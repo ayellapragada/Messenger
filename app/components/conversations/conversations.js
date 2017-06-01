@@ -12,6 +12,7 @@ import {
   fetchAllConversations,
   getMessages 
 } from '../../actions/message_actions.js';
+
 import Conversation from './conversation.js';
 
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id})
@@ -61,7 +62,6 @@ class Conversations extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
   },
   text: {
     textAlign: 'center',
