@@ -6,8 +6,12 @@ import {
   StyleSheet,
 } from 'react-native';
 import { connect } from 'react-redux'; 
+import Pusher from 'pusher-js/react-native';
 
-import { fetchAllConversations } from '../../actions/message_actions.js';
+import { 
+  fetchAllConversations,
+  getMessages 
+} from '../../actions/message_actions.js';
 import Conversation from './conversation.js';
 
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id})
@@ -19,7 +23,24 @@ class Conversations extends Component {
 
   componentWillMount() {
     this.props.fetchAllConversations();
+    this.pusher = new Pusher('7e8e957ce7d0485a1034', {cluster: "mt1"});                            
+    this.chatRoom = this.pusher.subscribe('messages');                           
   }
+
+  componentWillUnmount() {                                                                                      
+    this.chatRoom.unbind();                                                                                     
+    this.pusher.unsubscribe(this.chatRoom);                                                                     
+  }                                                                                                             
+
+  componentDidMount() {                                                                                         
+    const currentUser = this.props.currentUser;                                                                 
+    this.chatRoom.bind('new_message',                                                                           
+      (data) => {                                                                                               
+        if (data.recipient_id === currentUser.id) {                               
+          this.props.getMessages(data.id);                                                                      
+        }                                                                                                       
+      });                                                                                                       
+  }      
 
   render() {
     const conversations = Object.values(this.props.conversations);
@@ -54,6 +75,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   fetchAllConversations: () => dispatch(fetchAllConversations()),
+  getMessages: (id) => dispatch(getMessages(id)),
 });
 
 export default connect (mapStateToProps, mapDispatchToProps)(Conversations);

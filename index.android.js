@@ -4,3 +4,4 @@ import { AppRegistry } from 'react-native';
 import Root from './root';
 
 AppRegistry.registerComponent('Messenger', () => Root);
+console.ignoredYellowBox = [ 'Setting a timer' ]
