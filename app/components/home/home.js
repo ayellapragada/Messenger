@@ -3,10 +3,15 @@ import {
   Text, 
   View,
   Button,
+  Image,
   StyleSheet,
 } from 'react-native';
 import { connect } from 'react-redux';
+
+import Conversations from '../conversations/conversations.js';
 import { logout } from '../../actions/session_actions.js';
+
+
 
 const Home = ({currentUser, logout}) => {
 
@@ -15,6 +20,11 @@ const Home = ({currentUser, logout}) => {
       <Text style={styles.text}>
         {currentUser.full_name}
       </Text>
+      <Image 
+        style={styles.image}
+        source={{uri: currentUser.profile_url}}
+      />
+      <Conversations />
       <Button title="Sign Out" onPress={logout} />
     </View>
   );
@@ -24,9 +34,14 @@ const Home = ({currentUser, logout}) => {
 const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
+    alignItems: 'center',
   },
   text: {
     textAlign: 'center',
+  },
+  image: {
+    width: 50,
+    height: 50,
   },
 });
 
