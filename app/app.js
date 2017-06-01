@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, } from 'react-native';
+import { View, StyleSheet, AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
+import { login } from './actions/session_actions.js';
 
 import Auth from './components/auth/auth.js';
 import Home from './components/home/home.js';
@@ -33,7 +34,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-
 });
 
 export default connect (mapStateToProps, mapDispatchToProps)(App);

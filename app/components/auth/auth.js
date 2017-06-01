@@ -22,6 +22,7 @@ export default class Auth extends Component {
     this.setState({login: !this.state.login});
   }
 
+
   render() {
     const { login } = this.state;
     const text = login ? "Go back" : "Sign in to Fafbook!";
