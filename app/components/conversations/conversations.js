@@ -23,23 +23,23 @@ class Conversations extends Component {
 
   componentWillMount() {
     this.props.fetchAllConversations();
-    this.pusher = new Pusher('7e8e957ce7d0485a1034', {cluster: "mt1"});                            
-    this.chatRoom = this.pusher.subscribe('messages');                           
+    this.pusher = new Pusher('7e8e957ce7d0485a1034', {cluster: "mt1"});
+    this.chatRoom = this.pusher.subscribe('messages')
   }
 
-  componentWillUnmount() {                                                                                      
-    this.chatRoom.unbind();                                                                                     
-    this.pusher.unsubscribe(this.chatRoom);                                                                     
-  }                                                                                                             
+  componentWillUnmount() {
+    this.chatRoom.unbind();
+    this.pusher.unsubscribe(this.chatRoom); 
+  }
 
-  componentDidMount() {                                                                                         
-    const currentUser = this.props.currentUser;                                                                 
-    this.chatRoom.bind('new_message',                                                                           
-      (data) => {                                                                                               
+  componentDidMount() {
+    const currentUser = this.props.currentUser;
+    this.chatRoom.bind('new_message', 
+      (data) => {              
         if (data.recipient_id === currentUser.id) {                               
-          this.props.getMessages(data.id);                                                                      
-        }                                                                                                       
-      });                                                                                                       
+          this.props.getMessages(data.id);     
+        } 
+      });
   }      
 
   render() {

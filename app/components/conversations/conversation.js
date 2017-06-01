@@ -18,13 +18,20 @@ class Conversation extends Component {
 
 
     return (
-      <Text>{ otherUser.full_name }: { message.body }</Text>
+      <Text
+        style={styles.text}
+      >
+        { otherUser.full_name }: { message.body }
+      </Text>
     );
   }
 
 }
 
 const styles = StyleSheet.create({
+  text: {
+    fontSize: 18,
+  }
 });
 
 const mapStateToProps = state => ({

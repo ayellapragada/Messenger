@@ -17,15 +17,22 @@ const Home = ({currentUser, logout}) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>
-        {currentUser.full_name}
-      </Text>
-      <Image 
-        style={styles.image}
-        source={{uri: currentUser.profile_url}}
-      />
+      <View style={styles.header}>
+        <Button 
+          title="Sign Out" 
+          onPress={logout} 
+        />
+        <View style={styles.headerView}>
+          <Image 
+            style={styles.image}
+            source={{uri: currentUser.profile_url}}
+          />
+          <Text style={styles.text}>
+            {currentUser.fname}
+          </Text>
+        </View>
+      </View>
       <Conversations />
-      <Button title="Sign Out" onPress={logout} />
     </View>
   );
 };
@@ -33,14 +40,25 @@ const Home = ({currentUser, logout}) => {
 
 const styles = StyleSheet.create({
   container: {
+  },
+  button: {
+  },
+  header: {
+    flexDirection: 'row',
+    margin: 10,
+    justifyContent: "space-between"
+  },
+  headerView: {
+    flexDirection: 'row',
     alignItems: 'center',
   },
   text: {
     textAlign: 'center',
   },
   image: {
-    width: 50,
-    height: 50,
+    width: 25,
+    height: 25,
+    borderRadius: 50,
   },
 });
 
