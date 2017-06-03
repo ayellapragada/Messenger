@@ -29,6 +29,7 @@ class Chat extends Component {
       (data) => {              
         if (data.recipient_id === currentUser.id) {                               
           this.props.getMessages(data.id);     
+          this.flatList.scrollToEnd();
         } 
       });
   }      
@@ -48,6 +49,10 @@ class Chat extends Component {
           data={messages}
           keyExtractor={message => message.id }
           renderItem={(message) => <Message {...message} otherUser={otherUser} />}
+          ref={ref => this.flatList = ref }
+          onContentSizeChange={(contentWidth, contentHeight) => {
+            this.flatList.scrollToEnd();
+          }}
         />
       </View>
     );
