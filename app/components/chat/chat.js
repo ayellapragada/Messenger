@@ -35,8 +35,10 @@ class Chat extends Component {
   }      
 
   render() {
-    const { messages, sender, recipient } = this.props.conversation;
+    const { sender, recipient } = this.props.conversation;
     const { conversation, currentUser } = this.props;
+
+    const messages = conversation.messages.reverse().splice(0, 30).reverse();
 
     const otherUser = currentUser.id === recipient.id ? sender : recipient;
 
