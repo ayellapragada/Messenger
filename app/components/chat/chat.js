@@ -3,16 +3,17 @@ import {
   View, 
   Text,  
   StyleSheet, 
-  TextInput,
   KeyboardAvoidingView,
   FlatList, } from 'react-native';
 import { connect } from 'react-redux';
 import Pusher from 'pusher-js/react-native';
 
 import { 
-  getMessages 
+  getMessages,
 } from '../../actions/message_actions.js';
+
 import Message from './message.js';
+import ChatInput from './input.js';
 
 class Chat extends Component {
   constructor(props) {
@@ -50,10 +51,7 @@ class Chat extends Component {
     const otherUser = currentUser.id === recipient.id ? sender : recipient;
 
     return (
-      <KeyboardAvoidingView 
-        behavior="padding" 
-        style={styles.container}
-      >
+      <View style={styles.container} >
         <FlatList
           style={styles.list}
           data={messages}
@@ -64,14 +62,8 @@ class Chat extends Component {
             this.flatList.scrollToEnd();
           }}
         />
-        <TextInput
-          style={styles.input}
-          underlineColorAndroid="transparent"
-          onChangeText={val => this.setState({input: val})}
-          onSubmitEditing={() => console.log(input)}
-          placeholder="Type a message..."
-        />
-      </KeyboardAvoidingView>
+        <ChatInput convoID={conversation.id} />
+      </View>
     );
   }
 }
