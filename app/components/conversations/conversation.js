@@ -24,12 +24,16 @@ class Conversation extends Component {
     const date = new Date(message.created_at);
     const dateForMessage = date.toDateString();
 
-
     return (
       <TouchableHighlight 
         style={styles.touchable}
         underlayColor="lavenderblush"
-        onPress={() => { Actions.chat();}}
+        onPress={() => { 
+          Actions.chat({
+            title: `Chat with ${otherUser.fname}!`,
+            id: this.props.id,
+          });
+        }}
       >
         <View style={styles.container}>
           <Image

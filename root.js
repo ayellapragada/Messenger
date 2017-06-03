@@ -22,7 +22,10 @@ const Scenes = Actions.create(
       initial={true}
       hideNavBar={true}
     />
-    <Scene key="chat" component={Chat} />
+    <Scene key="chat" 
+      component={Chat} 
+      hideNavBar={false}
+    />
   </Scene>
 );
 
