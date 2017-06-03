@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
-import { View, Text,  StyleSheet, FlatList, } from 'react-native';
+import { 
+  View, 
+  Text,  
+  StyleSheet, 
+  TextInput,
+  KeyboardAvoidingView,
+  FlatList, } from 'react-native';
 import { connect } from 'react-redux';
 import Pusher from 'pusher-js/react-native';
 
@@ -11,6 +17,7 @@ import Message from './message.js';
 class Chat extends Component {
   constructor(props) {
     super(props);
+    this.state = { input: "" };
   }
 
   componentWillMount() {
@@ -36,16 +43,17 @@ class Chat extends Component {
 
   render() {
     const { sender, recipient } = this.props.conversation;
-    const { conversation, currentUser } = this.props;
+    const { conversation, currentUser, input } = this.props;
 
     const messages = conversation.messages.reverse().splice(0, 30).reverse();
 
     const otherUser = currentUser.id === recipient.id ? sender : recipient;
 
     return (
-      <View style={styles.container}>
-        <View style={styles.placeholder}/>
-        <Text> {messages.length} </Text>
+      <KeyboardAvoidingView 
+        behavior="padding" 
+        style={styles.container}
+      >
         <FlatList
           style={styles.list}
           data={messages}
@@ -56,7 +64,14 @@ class Chat extends Component {
             this.flatList.scrollToEnd();
           }}
         />
-      </View>
+        <TextInput
+          style={styles.input}
+          underlineColorAndroid="transparent"
+          onChangeText={val => this.setState({input: val})}
+          onSubmitEditing={() => console.log(input)}
+          placeholder="Type a message..."
+        />
+      </KeyboardAvoidingView>
     );
   }
 }

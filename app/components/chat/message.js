@@ -33,7 +33,9 @@ export default class Message extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    margin: 10,
+    margin: 3,
+    marginLeft: 10,
+    marginRight: 10,
     alignSelf: 'flex-end',
     flexDirection: 'row',
     maxWidth: 300,
@@ -47,7 +49,7 @@ const styles = StyleSheet.create({
   text: {
     borderRadius: 12,
     fontSize: 16,
-    backgroundColor: '#4080ff',
+    backgroundColor: '#0084ff',
     padding: 10,
     color: 'white',
   },

@@ -30,7 +30,7 @@ class Conversation extends Component {
         underlayColor="lavenderblush"
         onPress={() => { 
           Actions.chat({
-            title: `Chat with ${otherUser.fname}!`,
+            title: `${otherUser.full_name}`,
             id: this.props.id,
           });
         }}
