@@ -7,6 +7,7 @@ import {
   TouchableHighlight,
 } from 'react-native';
 import { connect } from 'react-redux';
+import { Actions } from 'react-native-router-flux';
 
 
 class Conversation extends Component {
@@ -28,7 +29,7 @@ class Conversation extends Component {
       <TouchableHighlight 
         style={styles.touchable}
         underlayColor="lavenderblush"
-        onPress={() => {console.log('hi')}}
+        onPress={() => { Actions.chat();}}
       >
         <View style={styles.container}>
           <Image

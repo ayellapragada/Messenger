@@ -3,7 +3,7 @@ import { applyMiddleware, createStore, compose } from 'redux';
 import { connect, Provider } from 'react-redux';
 import { createLogger } from 'redux-logger';
 import thunk from 'redux-thunk';
-import { Router, Scene } from 'react-native-router-flux';
+import { Router, Scene, Actions } from 'react-native-router-flux';
 
 import RootReducer from './app/reducers/root_reducer';
 import App from './app/app';
@@ -14,24 +14,23 @@ const middleware = [thunk, logger];
 const store = compose(applyMiddleware(...middleware))(createStore)(RootReducer);
 const ConnectedRouter = connect()(Router);
 
+
+const Scenes = Actions.create(
+  <Scene key="root">
+    <Scene key="home"
+      component={App}
+      initial={true}
+      hideNavBar={true}
+    />
+    <Scene key="chat" component={Chat} />
+  </Scene>
+);
+
 const Root = () => {
   return (
     <Provider store={store}>
-      <ConnectedRouter>
-        <Scene key="root">
-          <Scene key="home"
-            component={App}
-            initial={true}
-            hideNavBar={true}
-          />
-          <Scene key="chat"
-            component={App}
-            initial={true}
-            hideNavBar={true}
-          />
-      </Scene>
-    </ConnectedRouter>
-  </Provider>
+      <ConnectedRouter scenes={Scenes}/>
+    </Provider>
   );
 };
 
