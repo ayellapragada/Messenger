@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import { 
+import React, { Component } from 'react'; import { 
   View, 
   Text,  
   StyleSheet, 
   KeyboardAvoidingView,
+  Platform,
   FlatList, } from 'react-native';
 import { connect } from 'react-redux';
 import Pusher from 'pusher-js/react-native';
@@ -46,12 +46,12 @@ class Chat extends Component {
     const { sender, recipient } = this.props.conversation;
     const { conversation, currentUser, input } = this.props;
 
-    const messages = conversation.messages.reverse().splice(0, 30).reverse();
+    const messages = conversation.messages.reverse().splice(0, 20).reverse();
 
     const otherUser = currentUser.id === recipient.id ? sender : recipient;
 
     return (
-      <View style={styles.container} >
+      <View style={styles.container}>
         <FlatList
           style={styles.list}
           data={messages}
@@ -72,9 +72,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  placeholder: {
-  },
   list: {
+    flex: 1,
   },
 });
 

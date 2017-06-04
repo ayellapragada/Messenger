@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TextInput, StyleSheet } from 'react-native';
+import { TextInput, StyleSheet, Keyboard } from 'react-native';
 import { connect } from 'react-redux';
 
 import { sendMessage } from '../../actions/message_actions.js';
@@ -8,6 +8,7 @@ class ChatInput extends Component {
   constructor(props) {
     super(props);
     this.state = {body: ""};
+
     this.submitMessage = this.submitMessage.bind(this);
   }
 
@@ -15,7 +16,7 @@ class ChatInput extends Component {
     const { convoID, currentUser } = this.props;
     const { body } = this.state;
     this.props.sendMessage(convoID, currentUser.id, body)
-    .then(this.setState({body: ""}));
+      .then(this.setState({body: ""}));
   }
 
   render() {
@@ -37,7 +38,6 @@ class ChatInput extends Component {
 
 const styles = StyleSheet.create({
   input: {
-
   },
 });
 
