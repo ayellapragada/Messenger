@@ -30,7 +30,6 @@ export const newConversation = (sender_id, recipient_id) => (
     })
   .then(handleResponse)
   .then(response => response.json())
-  .then(responseJson => responseJson )
 )
 
 export const readConversation = (id) => (

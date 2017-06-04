@@ -45,7 +45,8 @@ class Conversations extends Component {
 
   render() {
     const conversations = Object.values(this.props.conversations);
-    const dataSource = ds.cloneWithRows(conversations);
+    const sortedConversations = conversations.sort((a,b) => new Date(b.time) - new Date(a.time))
+    const dataSource = ds.cloneWithRows(sortedConversations);
 
     return (
       <View style={styles.container}>

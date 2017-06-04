@@ -7,6 +7,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import { connect } from 'react-redux';
+import { Actions } from 'react-native-router-flux';
 
 import Conversations from '../conversations/conversations.js';
 import { logout } from '../../actions/session_actions.js';
@@ -19,8 +20,8 @@ const Home = ({currentUser, logout}) => {
     <View style={styles.container}>
       <View style={styles.header}>
         <Button 
-          title="Sign Out" 
-          onPress={logout} 
+          title="Search" 
+          onPress={() =>{Actions.search()}}
         />
         <View style={styles.headerView}>
           <Image 
