@@ -1,5 +1,6 @@
 import React from 'react';
 import { applyMiddleware, createStore, compose } from 'redux';
+import { StyleSheet } from 'react-native';
 import { connect, Provider } from 'react-redux';
 import { createLogger } from 'redux-logger';
 import thunk from 'redux-thunk';
@@ -38,9 +39,19 @@ const Scenes = Actions.create(
 const Root = () => {
   return (
     <Provider store={store}>
-      <ConnectedRouter scenes={Scenes}/>
+      <ConnectedRouter scenes={Scenes} />
     </Provider>
   );
 };
+
+const styles = StyleSheet.create({
+  navBar: {
+    color: 'red',
+
+  },
+  navTitle: {
+
+  },
+});
 
 export default Root;

@@ -3,6 +3,7 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
+  Button,
   AsyncStorage,
   Text,
   View,
@@ -28,6 +29,7 @@ class Login extends Component {
     this.onRegisterPressed = this.onRegisterPressed.bind(this);
     this.getUsersFromApi = this.getUsersFromApi.bind(this);
     this.login = this.login.bind(this);
+    this.demo = this.demo.bind(this);
   }
 
   componentWillMount() {
@@ -72,6 +74,11 @@ class Login extends Component {
       .then((res) => { this.storeToken(res.currentUser.session_token)});
   }
 
+  demo() {
+    this.props.login({email: 'test@password.com', password:'password'})
+      .then((res) => { this.storeToken(res.currentUser.session_token)});
+  }
+
   render() {
     const {email, password} = this.state;
 
@@ -87,16 +94,20 @@ class Login extends Component {
         style={styles.input} placeholder="Password"
         secureTextEntry={true}
       />
-
-    <TouchableOpacity 
-      style={styles.button}
-      onPress={this.onRegisterPressed}
-    >
-      <Text style={styles.buttonText}>
-        Log In
-      </Text>
-    </TouchableOpacity>
-  </View>
+      <View style={styles.buttonsView}>
+        <Button 
+          title="Log In"
+          style={styles.button}
+          onPress={this.onRegisterPressed}
+        />
+        <Button
+          style={styles.button}
+          title="Demo"
+          color="#841584"
+          onPress={this.demo}
+        />
+      </View>
+    </View>
     );
   }
 }
@@ -109,11 +120,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   button: {
-    padding: 20,
-    alignSelf: 'center',
   },
-  buttonText: {
-
+  buttonsView: {
+    justifyContent: 'space-around',
+    alignItems: 'center',
   },
 });
 

@@ -32,6 +32,10 @@ const Home = ({currentUser, logout}) => {
             {currentUser.fname}
           </Text>
         </View>
+        <Button
+          title="Logout"
+          onPress={logout}
+        />
       </View>
       <Conversations />
     </View>
@@ -55,11 +59,13 @@ const styles = StyleSheet.create({
   },
   text: {
     textAlign: 'center',
+    fontSize: 20,
   },
   image: {
     width: 25,
     height: 25,
     borderRadius: 50,
+    marginRight: 5,
   },
 });
 
