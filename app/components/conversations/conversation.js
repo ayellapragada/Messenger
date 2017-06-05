@@ -20,13 +20,14 @@ class Conversation extends Component {
 
     const otherUser = currentUser.id === recipient.id ? sender : recipient;
     const lastSender = currentUser.id === message.user_id ? "You" : otherUser.fname;
+    const unread = !message.read && message.user_id !== currentUser.id;
 
     const date = new Date(message.created_at);
     const dateForMessage = date.toDateString();
 
     return (
       <TouchableHighlight 
-        style={styles.touchable}
+        style={[styles.touchable, unread && styles.unread]}
         underlayColor="lavenderblush"
         onPress={() => { 
           Actions.chat({
@@ -35,7 +36,7 @@ class Conversation extends Component {
           });
         }}
       >
-        <View style={styles.container}>
+        <View style={[styles.container]}>
           <Image
             style={styles.image}
             source={{uri: otherUser.profile_url}}
@@ -79,6 +80,9 @@ const styles = StyleSheet.create({
     color: 'black',
     fontSize: 18,
   },
+  message: {
+    color: '#a09d9d',
+  },
   messageTime: {
     marginTop: 8,
     fontSize: 12,
@@ -91,7 +95,10 @@ const styles = StyleSheet.create({
   },
   touchable: {
 
-  }
+  },
+  unread: {
+    backgroundColor: '#edf2fa',
+  },
 });
 
 const mapStateToProps = state => ({
